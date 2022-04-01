@@ -9,8 +9,9 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id})
                     .select('-__v -password')
-                    .populate('savedBooks')
-            }
+                    return userData
+                }
+                throw new AuthenticationError('Not Logged In!')
 
     Mutation: {
         addUser: async (parent, args) => {
